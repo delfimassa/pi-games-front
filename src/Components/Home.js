@@ -104,7 +104,8 @@ const Home = () => {
                 <Card
                   name={e.name}
                   image={e.image}
-                  genres={e.genres.map((e) => e.name)} //xra que tariga solo un array de nombre s y no de objs
+                  genres={e.genres.map((e) => e.name)} 
+                  //xra que tariga solo un array de nombre s y no de objs, sino rompen los de api
                   key={e.id}
                 />
               </Link>
