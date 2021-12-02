@@ -5,7 +5,7 @@ const Card = ({image, name, genres}) => {
         <div>
             <h3>{name}</h3>
             <h5>{genres}</h5>
-            <img src={image} alt="image not found" width="200px" height="250px"></img>
+            <img src={image} alt="not found" width="200px" height="250px"></img>
         </div>
     );
 };

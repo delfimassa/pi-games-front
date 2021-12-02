@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideoGames, filterGamesByGenre } from "../actions";
+import { getVideoGames, filterGamesByGenre, filterBydborapi, orderByName } from "../actions";
 import { Link } from "react-router-dom";
 import Card from "./Card";
 import Paginado from "./Paginado";
@@ -13,6 +13,7 @@ const Home = () => {
   const indexOfLastGame = currentPage * gamesPerPage; //5
   const indexOfFirstGame = indexOfLastGame - gamesPerPage;
   const currentGames = allVideoGames.slice(indexOfFirstGame, indexOfLastGame);
+  const [oreden, setOrden] = useState('');
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -25,12 +26,23 @@ const Home = () => {
   function handleClick(e) {
     e.preventDefault();
     dispatch(getVideoGames());
-  }
+  };
 
   function handleFilterByGenres(e){
-    e.preventDefault();
     dispatch(filterGamesByGenre(e.target.value))
-  }
+  };
+
+  function handleFilterBydborapi(e){
+    dispatch(filterBydborapi(e.target.value))
+  };
+
+  function handleOrderByName(e){
+    e.preventDefault();
+    dispatch(orderByName(e.target.value))
+    setCurrentPage(1);
+    setOrden(`Ordenado ${e.target.value}`) //???
+  };
+
   return (
     <div>
       <Link to="/videogame">Agregar Videogame</Link>
@@ -43,15 +55,20 @@ const Home = () => {
         Volver a cargar todos los personajes
       </button>
       <div>
-        <select>
+        <select onChange={e=>handleOrderByName(e)}>
           <option value="asc">Alfabetico Asc</option>
           <option value="desc">Alfabetico Desc</option>
-          <option value="rating">Por Rating</option>
         </select>
         <select>
-          <option value="api">Desde la API</option>
-          <option value="db">Creado aqui</option>
+          <option value="rasc">Rating Asc</option>
+          <option value="rdesc">Rating Desc</option>
         </select>
+        <select onChange={e=>handleFilterBydborapi(e)}>
+         <option value="all">Todos</option>
+          <option value="api">Desde la API</option>
+          <option value="mydb">Creado aqui</option>
+        </select>
+
         <select onChange={e=>handleFilterByGenres(e)}>
           <option value="All">All</option>
           <option value="Action">Action</option>

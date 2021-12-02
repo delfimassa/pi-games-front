@@ -16,3 +16,17 @@ export function filterGamesByGenre(payload){
         payload
     }
 }
+
+export function filterBydborapi(payload){
+    return{
+        type: 'FILTER_BY_DBORAPI',
+        payload
+    }
+}
+
+export function orderByName(payload){
+    return{
+        type: 'ORDER_BY_NAME',
+        payload
+    }
+}
