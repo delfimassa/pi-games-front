@@ -1,23 +1,42 @@
 const initialState = {
   videogames: [],
+  detail: [],
+  genres: [],
   allVideoGames: [],
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+    // case EMPTY_DETAILS:
+    //   return {
+    //     ...state,
+    //     videogameDetail: [],
+    //   };
+
+    case "GET_VIDEOGAME_BY_NAME":
+      return {
+        ...state,
+        videogames: action.payload,
+      };
+
     case "GET_VIDEOGAMES":
       return {
         ...state,
         videogames: action.payload,
-        allVideoGames: action.payload, //?
+        allVideoGames: action.payload,
       };
-
+    case "GET_GENRES":
+      return {
+        ...state,
+        genres: action.payload,
+      };
+    case "POST_VIDEOGAME":
+      return { ...state };
     case "FILTER_BY_GENRE": {
       const allGames = state.allVideoGames;
-      // const statusFiltered = action.payload === 'All' ? allGames : allGames.filter(e=>e.genres.includes(action.payload))
       let gamesFiltered = [];
       if (action.payload === "All") {
-        return allGames;
+        return state.allVideoGames;
       } else {
         for (var i = 0; i < allGames.length; i++) {
           let gen = allGames[i].genres.map((elem) => elem.name);
@@ -27,40 +46,77 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         videogames: gamesFiltered,
-      }
-    };
-
-    case 'FILTER_BY_DBORAPI':
-      const dborapiFilter = action.payload === 'mydb' ? state.allVideoGames.filter(e=>e.createdInDb) : state.allVideoGames.filter(e=>!e.createdInDb)
-    return{
-      ...state,
-      videogames: action.payload === 'all' ? state.allVideoGames : dborapiFilter
-      //videogames: dborapiFilter
+      };
     }
 
-    case 'ORDER_BY_NAME':
-      let sortedArr = action.payload === 'asc' ? state.videogames.sort(function(a,b){
-        if(a.name>b.name){
-          return 1;
-        }
-        if(a.name<b.name){
-          return -1
-        }
-        return 0;
-      }) : state.videogames.sort(function(a,b){
-        if(a.name>b.name){
-          return -1;
-        }
-        if(a.name<b.name){
-          return 1
-        }
-        return 0;
-      })
+    case "FILTER_BY_DBORAPI":
+      const dborapiFilter =
+        action.payload === "all"
+          ? state.allVideoGames
+          : action.payload === "mydb"
+          ? state.allVideoGames.filter((e) => e.createdInDb)
+          : state.allVideoGames.filter((e) => !e.createdInDb);
       return {
         ...state,
-        videogames: sortedArr
-      }
+        videogames: dborapiFilter,
+      };
 
+    case "ORDER_BY_NAME":
+      let sortedArr =
+        action.payload === "asc"
+          ? state.videogames.sort(function (a, b) {
+              if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                return 1;
+              }
+              if (a.name.toLowerCase() < b.name.toLowerCase()) {
+                return -1;
+              }
+              return 0;
+            })
+          : state.videogames.sort(function (a, b) {
+              if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                return -1;
+              }
+              if (a.name.toLowerCase() < b.name.toLowerCase()) {
+                return 1;
+              }
+              return 0;
+            });
+      return {
+        ...state,
+        videogames: sortedArr,
+      };
+
+    case "ORDER_BY_RATING":
+      let sortedByRating =
+        action.payload === "rasc"
+          ? state.videogames.sort(function (a, b) {
+              if (a.rating > b.rating) {
+                return 1;
+              }
+              if (a.rating < b.rating) {
+                return -1;
+              }
+              return 0;
+            })
+          : state.videogames.sort(function (a, b) {
+              if (a.rating > b.rating) {
+                return -1;
+              }
+              if (a.name < b.name) {
+                return 1;
+              }
+              return 0;
+            });
+      return {
+        ...state,
+        videogames: sortedByRating,
+      };
+    case "GET_VIDEOGAME_BY_ID":
+      return {
+        ...state,
+        detail: action.payload,
+      };
     default:
       return state;
   }
