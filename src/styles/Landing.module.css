@@ -1,0 +1,42 @@
+
+*{
+    margin:0;
+    padding:0;
+}
+.landing{
+    height:100vh;
+    width: 100vw;
+    background-image: url(../assets/img/child-playing2.jpg);
+    background-size: 100% ;
+    background-repeat:no-repeat;
+    object-fit: cover;
+}
+
+.titulo{
+    font-size: 5rem;
+    /* color: #1F51FF; */
+    /* color:#E0FF85; */
+  color:#FF2525;
+  padding: 9rem 0rem 0rem 0rem;
+}
+.delfi{
+    color:#FF2525;
+  margin: 0rem 0rem 2rem 10rem ;
+}
+.letsgo{
+    background-color:#1F51FF;
+    color: white;
+    font-weight: bold;
+    font-size: 1.8rem;
+    border: none;
+    padding: 7px;
+    border-radius: 10%;
+    margin-left: 16rem;
+}
+.letsgo:hover{
+    background-color: #FF2525;
+}
+
+.contenedor{
+    padding: 0 5rem 0 5rem;
+  }
