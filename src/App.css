@@ -1,7 +1,63 @@
 * {
   font-family: "Poppins", sans-serif;
-
+  margin:0;
+  padding:0;
+  color:white;
 }
-.App {
-  /* text-align: center; */
+body{
+  background-color: #292929;
+}
+
+:root{
+    /* color:#E0FF85; */
+  --primary-color:#FF2525;
+  --secondary-color: #1F51FF;
+  --third-color:#660080;
+}
+
+.pimaryColor{
+  color:var(--primary-color);
+}
+.primaryBg{
+  background-color: var(--primary-color);
+}
+.secaondaryColor{
+  color: var(--secondary-color);
+}
+.secondaryBg{
+  background-color: var(--secondary-color);
+}
+.thirdColor{
+  color: var(--third-color);
+}
+.thirdBg{
+  background-color: var(--third-color);
+}
+
+button{
+  background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 7px;
+    border-radius:8px;
+    cursor: pointer;
+}
+button:hover{
+  background-color: (var(--secondary-color));
+}
+
+input, select, option{
+    /* border-color: #c9c8c8; */
+    border: none;
+    outline: none;
+    padding: 7px;
+    border-radius:8px;
+    margin: 0.2rem;
+    color:black;
+}
+select:focus-visible{
+  outline: none;
+}
+.noDecoration, a:link, a:visited {
+  text-decoration: none;
 }

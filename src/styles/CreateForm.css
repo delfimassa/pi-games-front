@@ -1,0 +1,13 @@
+form{
+    text-align: start;
+}
+
+.formGrid{
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+}
+
+.cols{
+    width: 100%;
+    margin-left: 0 1rem;
+}

@@ -1,0 +1,18 @@
+#navbar {
+  background-color: #ff2525;
+  background: linear-gradient(0deg, #ff2525 60%, #ff5757 100%);
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+.links{
+  margin-right: 5rem;
+  justify-content: flex-end;
+  text-decoration: none;
+}
+.logo{
+    padding-left: 2rem;
+}
+nav a{
+  margin-right: 1rem;
+}

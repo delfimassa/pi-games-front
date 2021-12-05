@@ -1,0 +1,35 @@
+.contenedor{
+    padding: 4rem 5rem 5rem 5rem;
+  }
+.centrado{
+    text-align: center;   
+}
+.jumbos{
+    background-color: #131313;
+    padding: 2rem;
+}
+.findUrGame{
+    display: flex;
+    color: var(--primary-color);
+    align-items: center;
+}
+.jumboSup{
+    margin-bottom:2rem;
+}
+.jumboInf{
+    display: grid;
+    grid-template-columns: 25%  25% 25% 25%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card{
+    padding: 1.5rem 0.5rem;
+}
+.imagenes{
+    width: 100%;
+    height: 165px;
+    overflow: hidden;
+    border-radius: 8px;
+    object-fit: cover;
+}

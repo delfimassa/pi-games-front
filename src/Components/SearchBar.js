@@ -26,11 +26,11 @@ const SearchBar = () => {
         <input
           type="text"
           value={name}
-          placeholder="Buscar..."
+          placeholder="Search here..."
           onChange={(e) => handleInputChange(e)}
         ></input>
         <button type="submit">
-          Buscar
+          Search
         </button>
       </form>
     </div>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { getVideogameById} from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import Navbar from './Navbar';
 
 const Detail = (props) => {
     console.log(props);
@@ -12,8 +13,10 @@ const Detail = (props) => {
 
     const selectedGame = useSelector((state)=>state.detail)
     return (
-        
         <div>
+            <Navbar/>
+        <div>
+            <p>DETAIL</p>
             {
                 selectedGame.length > 0 ?
                 <div>
@@ -29,7 +32,7 @@ const Detail = (props) => {
             }
             <Link to="/home">
             <button>Volver</button></Link>
-        </div>
+        </div></div>
     );
 };
 

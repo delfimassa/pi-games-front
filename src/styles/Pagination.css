@@ -1,0 +1,21 @@
+.pagWrapper{
+  text-align: center;
+}
+.pagination{
+  display: inline-block;
+}
+.pagination a {
+  cursor: pointer;
+  color: white;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+.pagination a:active {
+  background-color: var(--secondary-color);
+  color: white;
+}
+.pagination  a:hover:not(.active) {
+  background-color: var(--primary-color);
+  border-radius: 6px;
+}

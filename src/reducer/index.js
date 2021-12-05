@@ -1,4 +1,6 @@
-const initialState = {
+  
+  
+  const initialState = {
   videogames: [],
   detail: [],
   genres: [],
@@ -16,7 +18,7 @@ function rootReducer(state = initialState, action) {
     case "GET_VIDEOGAME_BY_NAME":
       return {
         ...state,
-        videogames: action.payload,
+        allVideoGames: action.payload,
       };
 
     case "GET_VIDEOGAMES":
@@ -38,7 +40,7 @@ function rootReducer(state = initialState, action) {
       if (action.payload === "All") {
         return state.allVideoGames;
       } else {
-        for (var i = 0; i < allGames.length; i++) {
+        for (var i = 0; i < allGames?.length; i++) {
           let gen = allGames[i].genres.map((elem) => elem.name);
           if (gen.includes(action.payload)) gamesFiltered.push(allGames[i]);
         }

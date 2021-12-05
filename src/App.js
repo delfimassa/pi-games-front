@@ -4,7 +4,7 @@ import LandingPage from './Components/LandingPage';
 import Home from './Components/Home';
 import Detail from './Components/Detail';
 import CreateForm from './Components/CreateForm';
-
+import About from './Components/About';
 function App() {
   return (
     <BrowserRouter>
@@ -14,6 +14,7 @@ function App() {
         <Route path='/home' component={Home}></Route>
         <Route path='/home/:id' render={({match})=> <Detail id={match.params.id}/> } />
         <Route path='/game' component={CreateForm}></Route>
+        <Route path='/about' component={About}></Route>
       </Switch>
     </div>
     </BrowserRouter>
