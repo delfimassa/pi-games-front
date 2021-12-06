@@ -12,7 +12,7 @@ function App() {
       <Switch>
         <Route exact path='/' component={LandingPage}></Route>
         <Route path='/home' component={Home}></Route>
-        <Route path='/home/:id' render={({match})=> <Detail id={match.params.id}/> } />
+        <Route path='/videogames/:id' render={({match})=> <Detail id={match.params.id}/> } />
         <Route path='/game' component={CreateForm}></Route>
         <Route path='/about' component={About}></Route>
       </Switch>

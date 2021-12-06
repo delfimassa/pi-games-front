@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import Navbar from './Navbar';
 
 const Detail = (props) => {
-    console.log(props);
     const dispatch = useDispatch();
+    const selectedGame = useSelector((state)=>state.detail)
+    
     useEffect(()=>{
         dispatch(getVideogameById(props.match.params.id))
     },[dispatch]);
 
-    const selectedGame = useSelector((state)=>state.detail)
     return (
         <div>
             <Navbar/>

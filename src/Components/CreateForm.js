@@ -5,25 +5,27 @@ import { useDispatch, useSelector } from "react-redux";
 import jsonPlatforms from "../platforms.json";
 import Navbar from "./Navbar";
 import "../styles/CreateForm.css";
+import mario from "../assets/img/mario-bros1.jpg";
+
 const validate = (input) => {
   let errores = {};
   if (!input.name) {
-    errores.name = "Required name";
+    errores.name = "Required name*";
   }
   if (!input.img) {
-    errores.img = "Required image";
+    errores.img = "Required image*";
   }
   if (input.genres.length === 0) {
-    errores.genres = "Required at least 1 genre";
+    errores.genres = "Required at least 1 genre*";
   }
   if (!input.rating) {
-    errores.rating = "Required rating";
+    errores.rating = "Required rating*";
   }
   if (!input.description) {
-    errores.description = "Required description";
+    errores.description = "Required description*";
   }
   if (input.platforms.length === 0) {
-    errores.platforms = "Required at least 1 platform";
+    errores.platforms = "Required at least 1 platform*";
   }
   return errores;
 };
@@ -133,28 +135,35 @@ const CreateForm = () => {
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="formGrid">
             {/* col1 */}
-            <div className="cols">
+            <div className="cols col1">
+              <img width="100%" src={mario} alt="mario"></img>
+            </div>
+            {/* col2 */}
+            <div className="cols col2">
               <div>
                 <label>Name: </label>
                 <br />
+                {errors.name && <p className="required">{errors.name}</p>}
+
                 <input
                   onChange={(e) => handleChange(e)}
                   type="text"
                   value={input.name}
                   name="name"
                 ></input>
-                {errors.name && <p>{errors.name}</p>}
               </div>
               <div>
                 <label>Description: </label>
-                <br />
+                <br />{" "}
+                {errors.description && (
+                  <p className="required">{errors.description}</p>
+                )}
                 <input
                   onChange={(e) => handleChange(e)}
                   type="text"
                   value={input.description}
                   name="description"
                 ></input>
-                {errors.description && <p>{errors.description}</p>}
               </div>
               <div>
                 <label>Launching date: </label>
@@ -170,27 +179,79 @@ const CreateForm = () => {
               <div>
                 <label>Rating: </label>
                 <br />
+                {errors.rating && <p className="required">{errors.rating}</p>}
+
                 <input
                   onChange={(e) => handleChange(e)}
                   type="number"
                   value={input.rating}
                   name="rating"
                 ></input>
-                {errors.rating && <p>{errors.rating}</p>}
               </div>
+            </div>
+            {/* col3 */}
+            <div className="cols col3">
               <div>
                 <label>Image: </label>
                 <br />
                 <input
+                  placeholder="image url here"
                   onChange={(e) => handleChange(e)}
                   type="text"
                   value={input.img}
                   name="img"
                 ></input>
               </div>
+              <label>Platforms:</label>
+              <br />
+              {errors.platforms && (
+                <p className="required">{errors.platforms}</p>
+              )}
+
+              <select>
+                {platforms &&
+                  platforms.map((pl) => {
+                    return (
+                      <option
+                        type="checkbox"
+                        name={pl.name}
+                        value={pl.name}
+                        onChange={(e) => handleCheckPlatforms(e)}
+                      >
+                        {pl.name}
+                      </option>
+                    );
+                  })}
+              </select>
+              <div className="">
+                <label>Genres:</label>
+                <br />
+                {errors.genres && <p className="required">{errors.genres}</p>}
+
+                <select>
+                  {genres &&
+                    genres.map((gr) => {
+                      return (
+                        <option
+                          type="checkbox"
+                          name={gr.name}
+                          value={gr.name}
+                          onChange={(e) => handleCheckGenres(e)}
+                        >
+                          {gr.name}
+                        </option>
+                      );
+                    })}
+                </select>
+              </div>
+              <br />
+              <button className="enviar" type="submit">
+                Enviar
+              </button>
             </div>
-            {/* col2 */}
-            <div className="cols">
+          </div>
+
+          {/* <div className="cols">
               <label>Platforms: </label>
               <br />
               {platforms &&
@@ -208,9 +269,9 @@ const CreateForm = () => {
                   );
                 })}
               {errors.platforms && <p>{errors.platforms}</p>}
-            </div>
-            {/* col3 */}
-            <div className="cols">
+            </div> */}
+          {/* col3 */}
+          {/* <div className="cols">
               <label>Genres: </label>
               <br />
               {genres &&
@@ -228,9 +289,7 @@ const CreateForm = () => {
                   );
                 })}
               {errors.genres && <p>{errors.genres}</p>}
-            </div>
-          </div>
-          <button type="submit">Enviar</button>
+            </div> */}
         </form>
       </div>
     </div>

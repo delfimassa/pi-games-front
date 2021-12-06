@@ -14,10 +14,10 @@ export function getVideoGames() {
   };
 }
 
-export function getVideogameByName(payload) {
+export function getVideogameByName(name) {
   return async function (dispatch) {
     try {
-      let json = axios.get(`http://localhost:3001/videogames?name=${payload}`);
+      let json = axios.get(`http://localhost:3001/videogames?name=${name}`);
       return dispatch({
         type: "GET_VIDEOGAME_BY_NAME",
         payload: json.data,
@@ -81,11 +81,6 @@ export function orderByRating(payload) {
   };
 }
 
-// export function emptyDetails() {
-//   return {
-//       type: "EMPTY_DETAILS"
-//   };
-// };
 
 export function getVideogameById(id) {
   return async function (dispatch) {
