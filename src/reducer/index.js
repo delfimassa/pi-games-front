@@ -7,6 +7,11 @@ const initialState = {
 
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
+    case "EMPTY_DETAILS":
+      return {
+          ...state,
+          videogameDetail: []
+      };
     case "GET_VIDEOGAME_BY_NAME":
       return {
         ...state,

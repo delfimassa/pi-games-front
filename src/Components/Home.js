@@ -166,8 +166,6 @@ const Home = () => {
                         name={e.name}
                         image={e.image}
                         genres={e.createdInDb? e.genres.map((e) => e.name): e.Genres.map((e)=>e.name)}
-                        // genres={e.genres.map((e) => e.name)}
-                        //xra que tariga solo un array de nombre s y no de objs, sino rompen los de api
                         rating={e.rating}
                         key={e.id}
                       />

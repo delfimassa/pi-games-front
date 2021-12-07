@@ -4,8 +4,7 @@
 .pagination{
   display: inline-block;
 }
-.pagination a {
-  cursor: pointer;
+.pagination button{
   color: white;
   float: left;
   padding: 8px 16px;
@@ -15,7 +14,6 @@
   background-color: var(--secondary-color);
   color: white;
 }
-.pagination  button:hover:not(.active) {
-  background-color: var(--primary-color);
-  border-radius: 6px;
+.pagination  button:hover {
+  background-color: var(--secondary-color);
 }
