@@ -8,7 +8,7 @@ const SearchBar = () => {
   const [name, setName] = useState("");
 
   function handleInputChange(e) {
-    e.preventDefault();
+    // e.preventDefault();
     setName(e.target.value);
     console.log(name);
   }
@@ -16,13 +16,16 @@ const SearchBar = () => {
   function handleSubmit(e) {
     e.preventDefault();
     if (name) {
-      dispatch(getVideogameByName(name));
+      dispatch(getVideogameByName(name));//pero no llega el payload
       setName("");
+      console.log(name);//si esta entrando 
+    }else{
+      console.log("no despacho la accion")
     }
   }
 
   return (
-    
+
       <form className="searchBar" onSubmit={(e) => handleSubmit(e)}>
         <input
         className="sizeSU"

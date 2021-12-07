@@ -1,37 +1,37 @@
 import React, { useEffect } from 'react';
-import { Link } from "react-router-dom";
 import { getVideogameById} from "../actions/index";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector,} from "react-redux";
+import { useParams } from 'react-router-dom';
 import Navbar from './Navbar';
+import defaultimg from "../assets/img/joysticks.jpg"
 
-const Detail = (props) => {
+const Detail = () => {
     const dispatch = useDispatch();
-    const selectedGame = useSelector((state)=>state.detail)
-    
-    useEffect(()=>{
-        dispatch(getVideogameById(props.match.params.id))
-    },[dispatch]);
+    const selectedGame = useSelector((state)=>state.detail);
+    console.log("selectedGame desde detail", selectedGame)
+    const params = useParams();
+
+    useEffect(() => {
+        dispatch(getVideogameById(params.id))
+    },[dispatch])
 
     return (
         <div>
             <Navbar/>
         <div>
             <p>DETAIL</p>
-            {
-                selectedGame.length > 0 ?
+            {selectedGame?
                 <div>
-                    <h1>{selectedGame[0].name}</h1>
-                    <img src={selectedGame[0].img? selectedGame[0].img: selectedGame[0].image} alt="aa" width="500px" height="700px"></img>
-                    <p>{selectedGame[0].description}</p>
-                    <p>{selectedGame[0].launching}</p>
-                    <p>{selectedGame[0].rating}</p>
-                    <p>{selectedGame[0].platforms}</p>
-                    <p>{!selectedGame[0].createdInDb? selectedGame[0].genres+'' : selectedGame[0].Genres}</p>
+                    <h1>{selectedGame.name}</h1>
+                    {/* <img src={selectedGame.img? selectedGame.img: selectedGame.image} alt="not found" width="500px" height="700px"></img> */}
+                    <img src={selectedGame.image? selectedGame.image : defaultimg} alt="not found" width="500px" height="700px"></img>
+                    <p>{selectedGame.description}</p>
+                    <p>{selectedGame.launching}</p>
+                    <p>{selectedGame.rating}</p>
+                    <p>{selectedGame.platforms}</p>
+                    <p>{selectedGame.genres}</p>
                 </div>
-                 : <div><p>Buscando...</p></div>
-            }
-            <Link to="/home">
-            <button>Volver</button></Link>
+                 : <div><p>Buscando...</p></div>}
         </div></div>
     );
 };

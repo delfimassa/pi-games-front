@@ -10,7 +10,7 @@ const LandingPage = () => {
     <div className="landing">
       <div className="contenedorLanding">
         <h1 className="tituloLanding primaryColor">
-          Game time <img src={logo} width="70px"></img>
+          Game time <img src={logo} width="70px" alt="logo, purple monster from pacman"></img>
         </h1>
         <h2 className="delfi primaryColor">By Delfi Massa</h2></div>
         <Link to="/home">

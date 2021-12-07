@@ -15,6 +15,7 @@ import "../styles/Home.css";
 import emoji from "../assets/img/joystick2.png";
 import Navbar from "./Navbar";
 
+
 const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -76,7 +77,7 @@ const Home = () => {
         {/* Jumbotron superior */}
         <div className="jumbos jumboSup">
           <h1 className="findUrGame">
-            Find your game <img src={emoji} width="45px"></img>
+            Find your game <img src={emoji} width="45px" alt="joystick emoji"></img>
           </h1>
           <nav className="navSU">
             <div className="colSearch">
@@ -110,7 +111,6 @@ const Home = () => {
             </select>
 
             <select
-              menuPlacement="bottom"
               onChange={(e) => handleFilterByGenres(e)}
             >
               <option>By genre</option>
@@ -164,14 +164,9 @@ const Home = () => {
                     <Link to={`/videogames/${e.id}`}>
                       <Card
                         name={e.name}
-                        image={
-                          e.image ? (
-                            e.image
-                          ) : (
-                            <img src="https://images.unsplash.com/photo-1580327344181-c1163234e5a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8dmlkZW8lMjBnYW1lfGVufDB8fDB8fA%3D%3D&w=1000&q=80" />
-                          )
-                        }
-                        genres={e.genres.map((e) => e.name)}
+                        image={e.image}
+                        genres={e.createdInDb? e.genres.map((e) => e.name): e.Genres.map((e)=>e.name)}
+                        // genres={e.genres.map((e) => e.name)}
                         //xra que tariga solo un array de nombre s y no de objs, sino rompen los de api
                         rating={e.rating}
                         key={e.id}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { postGame, getGenres } from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import jsonPlatforms from "../platforms.json";
@@ -55,7 +55,7 @@ const CreateForm = () => {
 
   useEffect(() => {
     dispatch(getGenres());
-  }, []);
+  }, []); ////
 
   function handleChange(e) {
     setInput({

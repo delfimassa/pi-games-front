@@ -11,9 +11,9 @@ const Paginado = ({ gamesPerpage, allVideoGames, paginado }) => {
     <nav className="pagination">
       {pageNumbers &&
         pageNumbers.map((number) => (
-          <a key={number} onClick={() => paginado(number)}>
+          <button key={number} onClick={() => paginado(number)}>
             {number}
-          </a>
+          </button>
         ))}
     </nav></div>
   );

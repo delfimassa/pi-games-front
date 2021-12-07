@@ -14,20 +14,6 @@ export function getVideoGames() {
   };
 }
 
-export function getVideogameByName(name) {
-  return async function (dispatch) {
-    try {
-      let json = axios.get(`http://localhost:3001/videogames?name=${name}`);
-      return dispatch({
-        type: "GET_VIDEOGAME_BY_NAME",
-        payload: json.data,
-      });
-    } catch (error) {
-      console.log("frontError, no se encontro el juego ");
-    }
-  };
-}
-
 export function getGenres() {
   return async function (dispatch) {
     try{let json = await axios.get("http://localhost:3001/genres", {});
@@ -38,6 +24,50 @@ export function getGenres() {
     
   };
 }
+
+export function getVideogameById(id) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get(`http://localhost:3001/videogames/${id}`);
+      console.log("getbyid desde actions", json);
+      return dispatch({
+        type: "GET_VIDEOGAME_BY_ID",
+        payload: json.data,
+      });
+      
+    } catch (error) {
+      console.log("no se pudo traer el detalle", error);
+    }
+  };
+}
+
+/* export function getVideogameByName(name) {
+  return function(dispatch){
+    axios.get("http://localhost:3001/nideogames?name=" + name)
+    .then(e => e.data)
+.then(data => dispatch({
+  type: "GET_VIDEOGAME_BY_NAME",
+  payload: data
+}))
+}
+}
+ */
+
+export function getVideogameByName(name) {
+  return async function (dispatch) {
+    try {
+      let json = await axios.get(`http://localhost:3001/videogames?name=${name}`);
+      console.log(json);
+      return dispatch({
+        type: "GET_VIDEOGAME_BY_NAME",
+        payload: json.data,
+      });
+    } catch (error) {
+      console.log("frontError, no se encontro el juego ");
+    }
+  };
+}
+
 
 export function postGame(payload) {
   return async function () {
@@ -82,17 +112,5 @@ export function orderByRating(payload) {
 }
 
 
-export function getVideogameById(id) {
-  return async function (dispatch) {
-    try {
-      var json = await axios.get(`http://localhost:3001/videogames/:${id}`);
-      return dispatch({
-        type: "GET_VIDEOGAME_BY_ID",
-        payload: json.data,
-      });
-    } catch (error) {
-      console.log("no se pudo traer el detalle", error);
-    }
-  };
-}
+
 

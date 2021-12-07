@@ -1,24 +1,22 @@
-  
-  
-  const initialState = {
+const initialState = {
   videogames: [],
   detail: [],
   genres: [],
   allVideoGames: [],
 };
 
-function rootReducer(state = initialState, action) {
+export default function rootReducer(state = initialState, action) {
   switch (action.type) {
-    // case EMPTY_DETAILS:
-    //   return {
-    //     ...state,
-    //     videogameDetail: [],
-    //   };
-
     case "GET_VIDEOGAME_BY_NAME":
       return {
         ...state,
-        allVideoGames: action.payload,
+        videogames: action.payload,
+      };
+
+    case "GET_VIDEOGAME_BY_ID":
+      return {
+        ...state,
+        detail: action.payload,
       };
 
     case "GET_VIDEOGAMES":
@@ -27,13 +25,16 @@ function rootReducer(state = initialState, action) {
         videogames: action.payload,
         allVideoGames: action.payload,
       };
+
     case "GET_GENRES":
       return {
         ...state,
         genres: action.payload,
       };
+
     case "POST_VIDEOGAME":
       return { ...state };
+
     case "FILTER_BY_GENRE": {
       const allGames = state.allVideoGames;
       let gamesFiltered = [];
@@ -114,14 +115,8 @@ function rootReducer(state = initialState, action) {
         ...state,
         videogames: sortedByRating,
       };
-    case "GET_VIDEOGAME_BY_ID":
-      return {
-        ...state,
-        detail: action.payload,
-      };
+
     default:
       return state;
   }
 }
-
-export default rootReducer;
