@@ -46,7 +46,7 @@ button:hover{
   background-color: (var(--secondary-color));
 }
 
-input, select, option{
+input, select, option, textarea{
     /* border-color: #c9c8c8; */
     border: none;
     outline: none;

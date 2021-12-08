@@ -70,36 +70,60 @@ const CreateForm = () => {
     );
   }
 
-  function handleCheckPlatforms(e) {
-    if (e.target.checked) {
-      setInput({
-        ...input,
-        platforms: [...input.platforms, e.target.value],
-      });
-    }
-    console.log(input.platforms);
+  // function handleCheckGenres(e) {
+  //   // if (e.target.checked) {
+  //   setInput({
+  //     ...input,
+  //     genres: [...input.genres, e.target.value],
+  //   });
+  //   // }
+  //   console.log(input.genres);
+  //   setErrors(
+  //     validate({
+  //       ...input,
+  //       rating: e.target.value,
+  //     })
+  //   );
+  // }
+  function handleSelectPlatforms(p) {
+    setInput({
+      ...input,
+      platforms: [...input.platforms, p.target.value],
+    });
+
     setErrors(
       validate({
         ...input,
-        rating: e.target.value,
+        platforms: p.target.value,
       })
     );
   }
 
-  function handleCheckGenres(e) {
-    // if (e.target.checked) {
+  function handleDeletePlatforms(e) {
+    setInput({
+      ...input,
+      platforms: input.platforms.filter((g) => g !== e),
+    });
+  }
+
+  function handleSelectGenres(e) {
     setInput({
       ...input,
       genres: [...input.genres, e.target.value],
     });
-    // }
-    console.log(input.genres);
     setErrors(
       validate({
         ...input,
-        rating: e.target.value,
+        platforms: e.target.value,
       })
     );
+  }
+
+  function handleDeleteGenre(el) {
+    setInput({
+      ...input,
+      genres: input.genres.filter((g) => g !== el),
+    });
   }
 
   function handleSubmit(e) {
@@ -116,14 +140,15 @@ const CreateForm = () => {
     } else {
       dispatch(postGame(input));
       alert("Videojuego creado con exito! :)");
-      //  setInput({
-      //  name: "",
-      //  description: "",
-      //  platforms: [],
-      //  img: "",
-      //  genres: [],
-      //  rating: 0,
-      //  released: "",})
+      setInput({
+        name: "",
+        description: "",
+        platforms: [],
+        img: "",
+        genres: [],
+        rating: 0,
+        released: "",
+      });
       history.push("/home");
     }
   }
@@ -132,165 +157,141 @@ const CreateForm = () => {
       <Navbar />
       <div className="contenedor centrado">
         <h1>Upload a new videogame!</h1>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <div className="formGrid">
-            {/* col1 */}
-            <div className="cols col1">
-              <img width="100%" src={mario} alt="mario"></img>
-            </div>
-            {/* col2 */}
-            <div className="cols col2">
-              <div>
-                <label>Name: </label>
-                <br />
-                {errors.name && <p className="required">{errors.name}</p>}
+        <div className="cardGrid">
+          {/* col1 */}
+          <div className="cols">
+            <img width="100%" src={mario} alt="mario"></img>
+          </div>
+          {/* col2 */}
+          <form className="col2" onSubmit={(e) => handleSubmit(e)}>
+            <div className="formGrid">
+              {/* col1 */}
+              <div className="cols col2">
+                <div>
+                  <label>Name: </label>
+                  <br />
+                  {errors.name && <p className="required">{errors.name}</p>}
 
-                <input
-                  onChange={(e) => handleChange(e)}
-                  type="text"
-                  value={input.name}
-                  name="name"
-                ></input>
+                  <input
+                    onChange={(e) => handleChange(e)}
+                    type="textarea"
+                    value={input.name}
+                    name="name"
+                  ></input>
+                </div>
+                <div>
+                  <label>Description: </label>
+                  <br />{" "}
+                  {errors.description && (
+                    <p className="required">{errors.description}</p>
+                  )}
+                  <textarea
+                    onChange={(e) => handleChange(e)}
+                    type="text"
+                    value={input.description}
+                    name="description"
+                  ></textarea>
+                </div>
+                <div>
+                  <label>Launching date: </label>
+                  <br />
+                  <input
+                    onChange={(e) => handleChange(e)}
+                    type="text"
+                    placeholder="aaaa-mm-dd"
+                    value={input.released}
+                    name="released"
+                  ></input>
+                </div>
+                <div>
+                  <label>Rating: </label>
+                  <br />
+                  {errors.rating && <p className="required">{errors.rating}</p>}
+
+                  <input
+                    onChange={(e) => handleChange(e)}
+                    type="number"
+                    value={input.rating}
+                    name="rating"
+                  ></input>
+                </div>
               </div>
-              <div>
-                <label>Description: </label>
-                <br />{" "}
-                {errors.description && (
-                  <p className="required">{errors.description}</p>
+              {/* col2 */}
+              <div className="cols">
+                <div>
+                  <label>Image: </label>
+                  <br />
+                  <input
+                    placeholder="image url here"
+                    onChange={(e) => handleChange(e)}
+                    type="text"
+                    value={input.img}
+                    name="img"
+                  ></input>
+                </div>
+                <label>Platforms:</label>
+                <br />
+                {errors.platforms && (
+                  <p className="required">{errors.platforms}</p>
                 )}
-                <input
-                  onChange={(e) => handleChange(e)}
-                  type="text"
-                  value={input.description}
-                  name="description"
-                ></input>
-              </div>
-              <div>
-                <label>Launching date: </label>
-                <br />
-                <input
-                  onChange={(e) => handleChange(e)}
-                  type="text"
-                  placeholder="aaaa-mm-dd"
-                  value={input.released}
-                  name="released"
-                ></input>
-              </div>
-              <div>
-                <label>Rating: </label>
-                <br />
-                {errors.rating && <p className="required">{errors.rating}</p>}
 
-                <input
-                  onChange={(e) => handleChange(e)}
-                  type="number"
-                  value={input.rating}
-                  name="rating"
-                ></input>
-              </div>
-            </div>
-            {/* col3 */}
-            <div className="cols col3">
-              <div>
-                <label>Image: </label>
-                <br />
-                <input
-                  placeholder="image url here"
-                  onChange={(e) => handleChange(e)}
-                  type="text"
-                  value={input.img}
-                  name="img"
-                ></input>
-              </div>
-              <label>Platforms:</label>
-              <br />
-              {errors.platforms && (
-                <p className="required">{errors.platforms}</p>
-              )}
-
-              <select>
-                {platforms &&
-                  platforms.map((pl) => {
-                    return (
-                      <option
-                        type="checkbox"
-                        name={pl.name}
-                        value={pl.name}
-                        onChange={(e) => handleCheckPlatforms(e)}
-                      >
-                        {pl.name}
-                      </option>
-                    );
-                  })}
-              </select>
-              <div className="">
-                <label>Genres:</label>
-                <br />
-                {errors.genres && <p className="required">{errors.genres}</p>}
-
-                <select>
-                  {genres &&
-                    genres.map((gr) => {
+                <select onChange={(e) => handleSelectPlatforms(e)}>
+                  {platforms &&
+                    platforms.map((pl) => {
                       return (
-                        <option
-                          type="checkbox"
-                          name={gr.name}
-                          value={gr.name}
-                          onChange={(e) => handleCheckGenres(e)}
-                        >
-                          {gr.name}
+                        <option type="checkbox" name={pl.name} value={pl.name}>
+                          {pl.name}
                         </option>
                       );
                     })}
                 </select>
-              </div>
-              <br />
-              <button className="enviar" type="submit">
-                Enviar
-              </button>
-            </div>
-          </div>
 
-          {/* <div className="cols">
-              <label>Platforms: </label>
-              <br />
-              {platforms &&
-                platforms.map((pl) => {
-                  return (
-                    <label>
-                      <input
-                        type="checkbox"
-                        name={pl.name}
-                        value={pl.name}
-                        onChange={(e) => handleCheckPlatforms(e)}
-                      ></input>
-                      {pl.name}
-                    </label>
-                  );
-                })}
-              {errors.platforms && <p>{errors.platforms}</p>}
-            </div> */}
-          {/* col3 */}
-          {/* <div className="cols">
-              <label>Genres: </label>
-              <br />
-              {genres &&
-                genres.map((gr) => {
-                  return (
-                    <label>
-                      <input
-                        type="checkbox"
-                        name={gr.name}
-                        value={gr.name}
-                        onChange={(e) => handleCheckGenres(e)}
-                      ></input>
-                      {gr.name}
-                    </label>
-                  );
-                })}
-              {errors.genres && <p>{errors.genres}</p>}
-            </div> */}
-        </form>
+                <div className="">
+                  <label>Genres:</label>
+                  <br />
+                  {errors.genres && <p className="required">{errors.genres}</p>}
+
+                  <select onChange={(e) => handleSelectGenres(e)}>
+                    {genres &&
+                      genres.map((gr) => {
+                        return (
+                          <option
+                            type="checkbox"
+                            name={gr.name}
+                            value={gr.name}
+                          >
+                            {gr.name}
+                          </option>
+                        );
+                      })}
+                  </select>
+                </div>
+                <br />
+                <button className="enviar" type="submit">
+                  Enviar
+                </button>
+              </div>
+            </div>
+          </form>
+          {/* col3 cardgrid */}
+          <div className="col3">
+            <label>Selected Platforms:</label>
+            {input.platforms.map((p) => (
+              <div className="selectedGenre">
+                <p>{p}</p>
+                <button onClick={() => handleDeletePlatforms(p)}>x</button>
+              </div>
+            ))}
+            <br />
+            <label>Selected Genres:</label>
+            {input.genres.map((el) => (
+              <div className="selectedGenre">
+                <p>{el} </p>
+                <button onClick={() => handleDeleteGenre(el)}>x</button>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

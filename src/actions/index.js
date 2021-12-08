@@ -41,11 +41,7 @@ export function getVideogameById(id) {
   };
 }
 
-export function emptyDetails() {
-  return {
-      type: "EMPTY_DETAILS"
-  };
-};
+
 
 /* export function getVideogameByName(name) {
   return function(dispatch){
