@@ -35,12 +35,7 @@ export default function rootReducer(state = initialState, action) {
 
     case "POST_VIDEOGAME":
       return { ...state };
-      // return{
-      //   ...state,
-      //   videogames: action.payload,
-      //   allVideoGames: action.payload,
-      //   gameCreated: action.payload,
-      // }
+    
 
     case "FILTER_BY_GENRE": {
       const allGames = state.allVideoGames;
@@ -51,6 +46,7 @@ export default function rootReducer(state = initialState, action) {
         for (var i = 0; i < allGames?.length; i++) {
           let gen = allGames[i].genres.map((elem) => elem.name);
           if (gen.includes(action.payload)) gamesFiltered.push(allGames[i]);
+          ////////////games not found
         }
       }
       return {
@@ -65,6 +61,7 @@ export default function rootReducer(state = initialState, action) {
           ? state.allVideoGames
           : action.payload === "mydb"
           ? state.allVideoGames.filter((e) => e.createdInDb)
+          ////////////games not fouuund
           : state.allVideoGames.filter((e) => !e.createdInDb);
       return {
         ...state,
@@ -122,6 +119,12 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         videogames: sortedByRating,
       };
+
+      case "DELETE_FILTERS":
+        return {
+            ...state,
+            videogames: state.allVideoGames
+        }
 
     default:
       return state;

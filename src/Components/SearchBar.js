@@ -16,9 +16,9 @@ const SearchBar = () => {
   function handleSubmit(e) {
     e.preventDefault();
     if (name) {
-      dispatch(getVideogameByName(name));//pero no llega el payload
+      dispatch(getVideogameByName(name));
       setName("");
-      console.log(name);//si esta entrando 
+      console.log(name);
     }else{
       console.log("no despacho la accion")
     }

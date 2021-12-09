@@ -1,12 +1,12 @@
 .contenedor{
-    padding: 3rem 4rem 3rem 4rem;
+    padding: 2rem 4rem 3rem 4rem;
   }
 .centrado{
     text-align: center;   
 }
 .jumbos{
     background-color: #131313;
-    padding: 2rem;
+    padding: 1rem;
 }
 .findUrGame{
     display: flex;
@@ -58,3 +58,10 @@
     border-radius: 8px;
     object-fit: cover;
 }
+.loading{
+    text-align: center;
+}
+
+button:hover{
+    background-color:#1F51FF;
+  }

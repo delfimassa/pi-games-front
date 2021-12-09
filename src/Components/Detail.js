@@ -42,7 +42,7 @@ const Detail = () => {
               <div className="details">
                 <h2 className="detailData">
                   <span className="span">Launching date: </span>
-                  {selectedGame.launching}
+                  {selectedGame.released||selectedGame.launching}
                 </h2>
                 <h2 className="detailData">
                   <span className="span">Rating: </span>
@@ -50,24 +50,29 @@ const Detail = () => {
                 </h2>
                 <h2 className="detailData">
                   <span className="span">Platforms: </span>
-                  {" "+selectedGame.platforms} 
+                  {" " + selectedGame.platforms}
                 </h2>
                 <h2 className="detailData">
                   <span className="span">Genres: </span>
                   {selectedGame.genres
-                    ? selectedGame.genres.map((e) => <span>{e.name} </span>) ||
-                      "selectedGame.genres"
+                    ? selectedGame.genres.map((e) => (
+                        <span key={e.name}>{e.name} </span>
+                      )) || "selectedGame.genres"
                     : selectedGame.Genres
-                    ? selectedGame.Genres.map((e) => <span>{e.name} </span>)
+                    ? selectedGame.Genres.map((e) => (
+                        <span key={e.name}>{e.name} </span>
+                      ))
                     : "no tiene generos"}
                 </h2>
               </div>
             </div>
-            <div className="description"><h2 className="detailData">
-              <span className="span">Description: </span>
-            </h2>
-            {selectedGame.description}</div>
-            
+            <div className="description">
+              <h2 className="detailData">
+                <span className="span">Description: </span>
+              </h2>
+              {selectedGame.description? <p> {selectedGame.description.replace(/<[^>]*>?/g, '')}</p> : <p>loading...</p>}
+              
+            </div>
           </div>
         ) : (
           <div>

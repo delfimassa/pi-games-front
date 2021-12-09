@@ -12,9 +12,11 @@
   text-decoration: none;
 }
 .pagination button:active {
-  background-color: var(--secondary-color);
+  background-color: #1F51FF;
   color: white;
 }
 .pagination  button:hover {
   background-color: var(--secondary-color);
 }
+
+

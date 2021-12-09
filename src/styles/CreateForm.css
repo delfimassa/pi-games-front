@@ -60,3 +60,7 @@ textarea {
    padding: 0px 10px;
    margin-bottom: 10px;
 }
+
+button:hover{
+  background-color:#1F51FF;
+}

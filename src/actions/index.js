@@ -10,6 +10,7 @@ export function getVideoGames() {
       });
     } catch (error) {
       console.log("frontError, no se encontraron los juegos");
+      ///////////////////game not foundddd
     }
   };
 }
@@ -41,8 +42,6 @@ export function getVideogameById(id) {
   };
 }
 
-
-
 /* export function getVideogameByName(name) {
   return function(dispatch){
     axios.get("http://localhost:3001/nideogames?name=" + name)
@@ -60,27 +59,26 @@ export function getVideogameByName(name) {
     try {
       let json = await axios.get(`http://localhost:3001/videogames?name=${name}`);
       console.log(json);
+
       return dispatch({
         type: "GET_VIDEOGAME_BY_NAME",
         payload: json.data,
       });
     } catch (error) {
       console.log("frontError, no se encontro el juego ");
+      ////game not fooound
     }
   };
 }
 
 
 export function postGame(payload) {
-  return async function (dispatch) {
-    try{let json = await axios.post(
+  return async function () {
+    try{
+      await axios.post(
       "http://localhost:3001/videogame",
       payload
     );
-    dispatch({
-      type: "POST_VIDEOGAME",
-      payload: json.data,
-    });
   }catch(error){
     console.log(error)
   }
@@ -113,6 +111,12 @@ export function orderByRating(payload) {
     type: "ORDER_BY_RATING",
     payload,
   };
+}
+
+export function deleteFilters(){
+  return{
+      type:"DELETE_FILTERS"
+  }
 }
 
 

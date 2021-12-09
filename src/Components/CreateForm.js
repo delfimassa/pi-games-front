@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { postGame, getGenres } from "../actions/index";
+import { getGenres } from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
 import jsonPlatforms from "../platforms.json";
 import Navbar from "./Navbar";
 import "../styles/CreateForm.css";
 import mario from "../assets/img/mario-bros1.jpg";
+import axios from "axios";
 
 const validate = (input) => {
   let errores = {};
   if (!input.name) {
     errores.name = "Required name*";
   }
-  if (!input.img) {
-    errores.img = "Required image*";
-  }
+  // if (!input.image) {
+  //   errores.image = "Required image*";
+  // }
   if (input.genres.length === 0) {
     errores.genres = "Required at least 1 genre*";
   }
@@ -39,14 +40,14 @@ const CreateForm = () => {
     name: "",
     description: "",
     platforms: [],
-    img: "",
+    image: "",
     genres: [],
     rating: "",
-    released: "",
+    launching: "",
   });
   const [errors, setErrors] = useState({
     name: "",
-    img: "",
+    // image: "",
     genres: "",
     rating: "",
     description: "",
@@ -55,7 +56,7 @@ const CreateForm = () => {
 
   useEffect(() => {
     dispatch(getGenres());
-  }, []); ////
+  }, []);
 
   function handleChange(e) {
     setInput({
@@ -115,7 +116,7 @@ const CreateForm = () => {
     setErrors(
       validate({
         ...input,
-        platforms: e.target.value,
+        genres: e.target.value,
       })
     );
   }
@@ -127,30 +128,24 @@ const CreateForm = () => {
     });
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     console.log(input);
-    if (
-      errors.name ||
-      errors.genres ||
-      errors.rating ||
-      errors.img ||
-      errors.platforms
-    ) {
+    if (errors.name || errors.genres || errors.rating || errors.platforms) {
       alert("Please insert required info");
     } else {
-      dispatch(postGame(input));
+      await axios.post("http://localhost:3001/videogame", input);
       alert("Videojuego creado con exito! :)");
-      // setInput({
-      //   name: "",
-      //   description: "",
-      //   platforms: [],
-      //   img: "",
-      //   genres: [],
-      //   rating: 0,
-      //   released: "",
-      // });
-      // history.push("/home");
+      setInput({
+        name: "",
+        description: "",
+        platforms: [],
+        image: "",
+        genres: [],
+        rating: 0,
+        released: "",
+      });
+      history.push("/home");
     }
   }
   return (
@@ -164,7 +159,7 @@ const CreateForm = () => {
             <img width="100%" src={mario} alt="mario"></img>
           </div>
           {/* col2 */}
-          <form className="col2" onSubmit={(e) => handleSubmit(e)}>
+          <form className="col2" onSubmit={handleSubmit}>
             <div className="formGrid">
               {/* col1 */}
               <div className="cols col2">
@@ -200,8 +195,8 @@ const CreateForm = () => {
                     onChange={(e) => handleChange(e)}
                     type="text"
                     placeholder="aaaa-mm-dd"
-                    value={input.released}
-                    name="released"
+                    value={input.launching}
+                    name="launching"
                   ></input>
                 </div>
                 <div>
@@ -226,41 +221,44 @@ const CreateForm = () => {
                     placeholder="image url here"
                     onChange={(e) => handleChange(e)}
                     type="text"
-                    value={input.img}
-                    name="img"
+                    value={input.image}
+                    name="image"
                   ></input>
                 </div>
-                <label>Platforms:</label>
-                <br />
-                {errors.platforms && (
-                  <p className="required">{errors.platforms}</p>
-                )}
 
-                <select value={input.platforms} onChange={(e) => handleSelectPlatforms(e)}>
-                  {platforms &&
-                    platforms.map((pl) => {
-                      return (
-                        <option type="checkbox" name={pl.name} value={pl.name}>
-                          {pl.name}
-                        </option>
-                      );
-                    })}
-                </select>
+                <div>
+                  <label>Platforms:</label>
+                  <br />
+                  {errors.platforms && <p className="required">{errors.platforms}</p>
+                  }
+                  <select
+                    value={input.platforms}
+                    onChange={(e) => handleSelectPlatforms(e)}
+                  >
+                    {platforms &&
+                      platforms.map((pl) => {
+                        return (
+                          <option key={pl.name} name={pl.name} value={pl.name}>
+                            {pl.name}
+                          </option>
+                        );
+                      })}
+                  </select>
+                </div>
 
-                <div className="">
+                <div>
                   <label>Genres:</label>
                   <br />
                   {errors.genres && <p className="required">{errors.genres}</p>}
 
-                  <select value={input.genres} onChange={(e) => handleSelectGenres(e)}>
+                  <select
+                    value={input.genres}
+                    onChange={(e) => handleSelectGenres(e)}
+                  >
                     {genres &&
                       genres.map((gr) => {
                         return (
-                          <option
-                            type="checkbox"
-                            name={gr.name}
-                            value={gr.name}
-                          >
+                          <option name={gr.name} value={gr.name} key={gr.name}>
                             {gr.name}
                           </option>
                         );
@@ -278,7 +276,7 @@ const CreateForm = () => {
           <div className="col3">
             <label>Selected Platforms:</label>
             {input.platforms.map((p) => (
-              <div className="selectedGenre">
+              <div className="selectedGenre" key={p}>
                 <p>{p}</p>
                 <button onClick={() => handleDeletePlatforms(p)}>x</button>
               </div>
@@ -286,7 +284,7 @@ const CreateForm = () => {
             <br />
             <label>Selected Genres:</label>
             {input.genres.map((el) => (
-              <div className="selectedGenre">
+              <div className="selectedGenre" key={el.name}>
                 <p>{el} </p>
                 <button onClick={() => handleDeleteGenre(el)}>x</button>
               </div>

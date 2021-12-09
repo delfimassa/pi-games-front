@@ -1,19 +1,19 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import purplemonster from "../assets/img/alienmonster.png";
 import "../styles/Navbar.css";
 
 const Navbar = () => {
   return (
     <nav id="navbar">
-      <Link to="/home" className="logo">
+      <NavLink to="/home" className="logo">
         <img src={purplemonster} width="55px" alt="logo, purple monster from pacman"></img>
-      </Link>
+      </NavLink>
       <div className="links">
         {" "}
-        <Link to="/home" className="noDecoration">Home</Link>
-        <Link to="/about" className="noDecoration">About</Link>
-        <Link to="/game" className="noDecoration">Upload</Link>
+        <NavLink to="/home" className="noDecoration" activeClassName="selected">Home</NavLink>
+        <NavLink to="/about" className="noDecoration" activeClassName="selected">About</NavLink>
+        <NavLink to="/game" className="noDecoration" activeClassName="selected">Upload</NavLink>
       </div>
     </nav>
   );

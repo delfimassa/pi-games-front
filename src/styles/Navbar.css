@@ -15,4 +15,8 @@
 }
 nav a{
   margin-right: 1rem;
+} 
+
+.selected{
+  color: #1F51FF;
 }

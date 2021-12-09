@@ -6,6 +6,7 @@ import {
   filterBydborapi,
   orderByName,
   orderByRating,
+  deleteFilters
 } from "../actions";
 import { Link } from "react-router-dom";
 import Card from "./Card";
@@ -14,7 +15,7 @@ import SearchBar from "./SearchBar";
 import "../styles/Home.css";
 import emoji from "../assets/img/joystick2.png";
 import Navbar from "./Navbar";
-
+import pacman from "../assets/img/pacman.gif";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const Home = () => {
   const lastGame = currentPage * gamesPerPage;
   const firstGame = lastGame - gamesPerPage;
   const currentGames = allVideoGames?.slice(firstGame, lastGame);
+  
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -37,7 +39,8 @@ const Home = () => {
 
   function handleClick(e) {
     e.preventDefault();
-    dispatch(getVideoGames());
+    // dispatch(getVideoGames());
+    dispatch(deleteFilters());
   }
 
   function handleOrderByName(e) {
@@ -68,8 +71,6 @@ const Home = () => {
     setOrder(`Ordenado ${e.target.value}`);
   }
 
-  //fucntion handleDelete
-
   return (
     <div>
       <Navbar />
@@ -77,7 +78,8 @@ const Home = () => {
         {/* Jumbotron superior */}
         <div className="jumbos jumboSup">
           <h1 className="findUrGame">
-            Find your game <img src={emoji} width="45px" alt="joystick emoji"></img>
+            Find your game{" "}
+            <img src={emoji} width="45px" alt="joystick emoji"></img>
           </h1>
           <nav className="navSU">
             <div className="colSearch">
@@ -110,9 +112,7 @@ const Home = () => {
               <option value="mydb">Created here</option>
             </select>
 
-            <select
-              onChange={(e) => handleFilterByGenres(e)}
-            >
+            <select onChange={(e) => handleFilterByGenres(e)}>
               <option>By genre</option>
               {/* <option value="All">All</option> */}
               <option value="Action">Action</option>
@@ -157,15 +157,19 @@ const Home = () => {
             paginado={paginado}
           />
           <div className="jumboInf">
-            {currentGames ? (
+            {currentGames.length > 0 ? (
               currentGames.map((e) => {
                 return (
-                  <div>
+                  <div key={e.id}>
                     <Link to={`/videogames/${e.id}`}>
                       <Card
                         name={e.name}
                         image={e.image}
-                        genres={e.genres? e.genres.map((e) => e.name+" "): e.Genres.map((e)=>e.name+" ")}
+                        genres={
+                          e.genres
+                            ? e.genres.map((e) => e.name + " ")
+                            : e.Genres.map((e) => e.name + " ")
+                        }
                         rating={e.rating}
                         key={e.id}
                       />
@@ -174,7 +178,10 @@ const Home = () => {
                 );
               })
             ) : (
-              <p>Error! no hay nungun juego :(</p>
+                <div className="loading">
+                  <img src={pacman} alt="pacman gif"></img>
+                  <p>Loading...</p>
+                </div>
             )}
           </div>
           <Pagination
