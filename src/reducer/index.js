@@ -3,6 +3,7 @@ const initialState = {
   detail: [],
   genres: [],
   allVideoGames: [],
+  gameCreated:[],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -34,6 +35,12 @@ export default function rootReducer(state = initialState, action) {
 
     case "POST_VIDEOGAME":
       return { ...state };
+      // return{
+      //   ...state,
+      //   videogames: action.payload,
+      //   allVideoGames: action.payload,
+      //   gameCreated: action.payload,
+      // }
 
     case "FILTER_BY_GENRE": {
       const allGames = state.allVideoGames;

@@ -165,7 +165,7 @@ const Home = () => {
                       <Card
                         name={e.name}
                         image={e.image}
-                        genres={e.genres? e.genres.map((e) => e.name): e.Genres.map((e)=>e.name)}
+                        genres={e.genres? e.genres.map((e) => e.name+" "): e.Genres.map((e)=>e.name+" ")}
                         rating={e.rating}
                         key={e.id}
                       />

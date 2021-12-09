@@ -41,7 +41,7 @@ const CreateForm = () => {
     platforms: [],
     img: "",
     genres: [],
-    rating: 0,
+    rating: "",
     released: "",
   });
   const [errors, setErrors] = useState({
@@ -85,6 +85,7 @@ const CreateForm = () => {
   //     })
   //   );
   // }
+
   function handleSelectPlatforms(p) {
     setInput({
       ...input,
@@ -136,20 +137,20 @@ const CreateForm = () => {
       errors.img ||
       errors.platforms
     ) {
-      alert("Inserte la informacion requerida");
+      alert("Please insert required info");
     } else {
       dispatch(postGame(input));
       alert("Videojuego creado con exito! :)");
-      setInput({
-        name: "",
-        description: "",
-        platforms: [],
-        img: "",
-        genres: [],
-        rating: 0,
-        released: "",
-      });
-      history.push("/home");
+      // setInput({
+      //   name: "",
+      //   description: "",
+      //   platforms: [],
+      //   img: "",
+      //   genres: [],
+      //   rating: 0,
+      //   released: "",
+      // });
+      // history.push("/home");
     }
   }
   return (
@@ -174,7 +175,7 @@ const CreateForm = () => {
 
                   <input
                     onChange={(e) => handleChange(e)}
-                    type="textarea"
+                    type="text"
                     value={input.name}
                     name="name"
                   ></input>
@@ -235,7 +236,7 @@ const CreateForm = () => {
                   <p className="required">{errors.platforms}</p>
                 )}
 
-                <select onChange={(e) => handleSelectPlatforms(e)}>
+                <select value={input.platforms} onChange={(e) => handleSelectPlatforms(e)}>
                   {platforms &&
                     platforms.map((pl) => {
                       return (
@@ -251,7 +252,7 @@ const CreateForm = () => {
                   <br />
                   {errors.genres && <p className="required">{errors.genres}</p>}
 
-                  <select onChange={(e) => handleSelectGenres(e)}>
+                  <select value={input.genres} onChange={(e) => handleSelectGenres(e)}>
                     {genres &&
                       genres.map((gr) => {
                         return (
