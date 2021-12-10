@@ -8,7 +8,7 @@ const SearchBar = () => {
   const [name, setName] = useState("");
 
   function handleInputChange(e) {
-    // e.preventDefault();
+    e.preventDefault();
     setName(e.target.value);
     console.log(name);
   }
@@ -19,8 +19,6 @@ const SearchBar = () => {
       dispatch(getVideogameByName(name));
       setName("");
       console.log(name);
-    }else{
-      console.log("no despacho la accion")
     }
   }
 

@@ -6,7 +6,7 @@ import {
   filterBydborapi,
   orderByName,
   orderByRating,
-  deleteFilters
+  deleteFilters,
 } from "../actions";
 import { Link } from "react-router-dom";
 import Card from "./Card";
@@ -26,12 +26,10 @@ const Home = () => {
   const allVideoGames = useSelector((state) => state.videogames);
   const [order, setOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  // const [gamesPerPage, setGamesPerPage] = useState(15);
   const gamesPerPage = 15;
   const lastGame = currentPage * gamesPerPage;
   const firstGame = lastGame - gamesPerPage;
   const currentGames = allVideoGames?.slice(firstGame, lastGame);
-  
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -39,7 +37,6 @@ const Home = () => {
 
   function handleClick(e) {
     e.preventDefault();
-    // dispatch(getVideoGames());
     dispatch(deleteFilters());
   }
 
@@ -178,10 +175,10 @@ const Home = () => {
                 );
               })
             ) : (
-                <div className="loading">
-                  <img src={pacman} alt="pacman gif"></img>
-                  <p>Loading...</p>
-                </div>
+              <div>
+                <p>Loading...</p>
+                <img src={pacman} alt="loading gif"></img>
+              </div>
             )}
           </div>
           <Pagination

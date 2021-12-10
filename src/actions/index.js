@@ -10,7 +10,6 @@ export function getVideoGames() {
       });
     } catch (error) {
       console.log("frontError, no se encontraron los juegos");
-      ///////////////////game not foundddd
     }
   };
 }
@@ -42,17 +41,6 @@ export function getVideogameById(id) {
   };
 }
 
-/* export function getVideogameByName(name) {
-  return function(dispatch){
-    axios.get("http://localhost:3001/nideogames?name=" + name)
-    .then(e => e.data)
-.then(data => dispatch({
-  type: "GET_VIDEOGAME_BY_NAME",
-  payload: data
-}))
-}
-}
- */
 
 export function getVideogameByName(name) {
   return async function (dispatch) {
@@ -66,7 +54,6 @@ export function getVideogameByName(name) {
       });
     } catch (error) {
       console.log("frontError, no se encontro el juego ");
-      ////game not fooound
     }
   };
 }

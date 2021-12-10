@@ -27,7 +27,6 @@ text-align: start;
 input,
 select,
 textarea {
-  /* width: 90%; */
   margin-bottom: 20px;
 }
 

@@ -46,7 +46,6 @@ export default function rootReducer(state = initialState, action) {
         for (var i = 0; i < allGames?.length; i++) {
           let gen = allGames[i].genres.map((elem) => elem.name);
           if (gen.includes(action.payload)) gamesFiltered.push(allGames[i]);
-          ////////////games not found
         }
       }
       return {
@@ -61,7 +60,6 @@ export default function rootReducer(state = initialState, action) {
           ? state.allVideoGames
           : action.payload === "mydb"
           ? state.allVideoGames.filter((e) => e.createdInDb)
-          ////////////games not fouuund
           : state.allVideoGames.filter((e) => !e.createdInDb);
       return {
         ...state,

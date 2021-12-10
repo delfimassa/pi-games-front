@@ -13,9 +13,6 @@ const validate = (input) => {
   if (!input.name) {
     errores.name = "Required name*";
   }
-  // if (!input.image) {
-  //   errores.image = "Required image*";
-  // }
   if (input.genres.length === 0) {
     errores.genres = "Required at least 1 genre*";
   }
@@ -47,7 +44,6 @@ const CreateForm = () => {
   });
   const [errors, setErrors] = useState({
     name: "",
-    // image: "",
     genres: "",
     rating: "",
     description: "",
@@ -70,23 +66,6 @@ const CreateForm = () => {
       })
     );
   }
-
-  // function handleCheckGenres(e) {
-  //   // if (e.target.checked) {
-  //   setInput({
-  //     ...input,
-  //     genres: [...input.genres, e.target.value],
-  //   });
-  //   // }
-  //   console.log(input.genres);
-  //   setErrors(
-  //     validate({
-  //       ...input,
-  //       rating: e.target.value,
-  //     })
-  //   );
-  // }
-
   function handleSelectPlatforms(p) {
     setInput({
       ...input,
@@ -145,7 +124,7 @@ const CreateForm = () => {
         rating: 0,
         released: "",
       });
-      history.push("/home");
+      // history.push("/home");
     }
   }
   return (
@@ -173,6 +152,7 @@ const CreateForm = () => {
                     type="text"
                     value={input.name}
                     name="name"
+                    required
                   ></input>
                 </div>
                 <div>
@@ -186,6 +166,7 @@ const CreateForm = () => {
                     type="text"
                     value={input.description}
                     name="description"
+                    required
                   ></textarea>
                 </div>
                 <div>
@@ -200,21 +181,6 @@ const CreateForm = () => {
                   ></input>
                 </div>
                 <div>
-                  <label>Rating: </label>
-                  <br />
-                  {errors.rating && <p className="required">{errors.rating}</p>}
-
-                  <input
-                    onChange={(e) => handleChange(e)}
-                    type="number"
-                    value={input.rating}
-                    name="rating"
-                  ></input>
-                </div>
-              </div>
-              {/* col2 */}
-              <div className="cols">
-                <div>
                   <label>Image: </label>
                   <br />
                   <input
@@ -225,7 +191,9 @@ const CreateForm = () => {
                     name="image"
                   ></input>
                 </div>
-
+              </div>
+              {/* col2 */}
+              <div className="cols">
                 <div>
                   <label>Platforms:</label>
                   <br />
@@ -234,6 +202,7 @@ const CreateForm = () => {
                   <select
                     value={input.platforms}
                     onChange={(e) => handleSelectPlatforms(e)}
+                    required
                   >
                     {platforms &&
                       platforms.map((pl) => {
@@ -253,7 +222,7 @@ const CreateForm = () => {
 
                   <select
                     value={input.genres}
-                    onChange={(e) => handleSelectGenres(e)}
+                    onChange={(e) => handleSelectGenres(e)} required="required"
                   >
                     {genres &&
                       genres.map((gr) => {
@@ -263,7 +232,21 @@ const CreateForm = () => {
                           </option>
                         );
                       })}
+                     
                   </select>
+                </div>
+                <div>
+                  <label>Rating: </label>
+                  <br />
+                  {errors.rating && <p className="required">{errors.rating}</p>}
+
+                  <input
+                    onChange={(e) => handleChange(e)}
+                    type="number"
+                    value={input.rating}
+                    name="rating"
+                    required
+                  ></input>
                 </div>
                 <br />
                 <button className="enviar" type="submit">
@@ -275,6 +258,7 @@ const CreateForm = () => {
           {/* col3 cardgrid */}
           <div className="col3">
             <label>Selected Platforms:</label>
+            
             {input.platforms.map((p) => (
               <div className="selectedGenre" key={p}>
                 <p>{p}</p>
