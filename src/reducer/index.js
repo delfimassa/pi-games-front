@@ -4,6 +4,7 @@ const initialState = {
   genres: [],
   allVideoGames: [],
   gameCreated:[],
+  loading:false,
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -12,6 +13,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         videogames: action.payload,
+        loading:false
       };
 
     case "GET_VIDEOGAME_BY_ID":
@@ -25,6 +27,7 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         videogames: action.payload,
         allVideoGames: action.payload,
+        loading: false
       };
 
     case "GET_GENRES":
@@ -122,6 +125,12 @@ export default function rootReducer(state = initialState, action) {
         return {
             ...state,
             videogames: state.allVideoGames
+        }
+
+        case "WAITING":
+        return {
+            ...state,
+            loading: true
         }
 
     default:

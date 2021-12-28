@@ -1,12 +1,13 @@
 import React from "react";
 import defaultimg from "../assets/img/joysticks.jpg"
 
-const Card = ({ image, name, genres, rating }) => {
+const Card = ({ image, name, genres, rating, metacritic}) => {
   return (
     <div className="card">
       <img className="imagenes" src={image? image : defaultimg} alt="not found" ></img> <h3>{name}</h3>
       <h5>( {genres})</h5>
       <h5>Rating: {rating}</h5>
+      <h5>Metacritic: {metacritic}</h5>
     </div>
   );
 };

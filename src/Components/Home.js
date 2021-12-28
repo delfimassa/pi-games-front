@@ -24,6 +24,7 @@ const Home = () => {
   }, [dispatch]);
 
   const allVideoGames = useSelector((state) => state.videogames);
+  const loading = useSelector((state) => state.loading);
   const [order, setOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const gamesPerPage = 15;
@@ -154,11 +155,16 @@ const Home = () => {
             paginado={paginado}
           />
           <div className="jumboInf">
-            {currentGames.length > 0 ? (
+            {loading ? (
+              <div>
+                <p>Loading...</p>
+                <img src={pacman} alt="loading gif"></img>
+              </div>
+            ) : (  currentGames.length ? (
               currentGames.map((e) => {
                 return (
                   <div key={e.id}>
-                    <Link to={`/videogames/${e.id}`}>
+                    <Link to={`/videogames/${e.id}`} className="hoverCards">
                       <Card
                         name={e.name}
                         image={e.image}
@@ -169,17 +175,13 @@ const Home = () => {
                         }
                         rating={e.rating}
                         key={e.id}
+                        metacritic={e.metacritic}
                       />
                     </Link>
                   </div>
                 );
               })
-            ) : (
-              <div>
-                <p>Loading...</p>
-                <img src={pacman} alt="loading gif"></img>
-              </div>
-            )}
+            ) : (<div><p>Game not found...</p></div>))}
           </div>
           <Pagination
             allVideoGames={allVideoGames?.length}
